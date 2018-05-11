@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": "https://github.com/seanwessmith/daily-spend",
+   "license": "ISC",
+   "dependencies": {
+     "body-parser": "1.15.x",
+     "ejs": "2.5.x",
+     "envvar": "1.1.x",
+     "express": "4.13.x",
+     "moment": "2.19.x",
+     "plaid": "2.3.x"
+   }
+}
