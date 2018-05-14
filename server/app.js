@@ -43,6 +43,7 @@ app.get('/', function (request, response, next) {
 
 app.post('/get_access_token', function (request, response, next) {
   PUBLIC_TOKEN = request.body.public_token;
+  console.log('PUBLIC_TOKEN: ', PUBLIC_TOKEN);
   client.exchangePublicToken(PUBLIC_TOKEN, function (error, tokenResponse) {
     if (error != null) {
       var msg = 'Could not exchange public_token!';
@@ -51,6 +52,7 @@ app.post('/get_access_token', function (request, response, next) {
         error: msg
       });
     }
+    console.log('setting ACCESS_TOKEN: ', tokenResponse);
     ACCESS_TOKEN = tokenResponse.access_token;
     ITEM_ID = tokenResponse.item_id;
     console.log('Access Token: ' + ACCESS_TOKEN);
@@ -115,10 +117,11 @@ app.post('/transactions', function (request, response, next) {
   // Pull transactions for the Item for the last 30 days
   var startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
   var endDate = moment().format('YYYY-MM-DD');
+
   client.getTransactions(ACCESS_TOKEN, startDate, endDate, {
     count: 250,
     offset: 0,
-  }, function (error, transactionsResponse) {
+  }, (error, transactionsResponse) => {
     if (error != null) {
       console.log(JSON.stringify(error));
       return response.json({
